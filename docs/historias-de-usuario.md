@@ -86,3 +86,92 @@ e senha, **para** fazer saques, depósitos e consultas.
 ---
 
 _Parte 2 (H05 a H09) em construção._
+
+## H05: Depositar (caixa eletrônico)
+**Como** cliente, **quero** depositar dinheiro em espécie no caixa
+eletrônico, **para** aumentar o saldo da minha conta.
+
+**Regras de negócio:**
+- **H05-R1:** O valor do depósito deve ser maior que zero.
+- **H05-R2:** O depósito aceita apenas cédulas, então o valor deve ser
+  em reais inteiros (sem centavos).
+- **H05-R3:** O valor máximo por depósito é de R$ 10.000,00.
+- **H05-R4:** O saldo é atualizado imediatamente após o depósito.
+- **H05-R5:** Todo depósito gera um lançamento no extrato.
+
+---
+
+## H06: Sacar (caixa eletrônico)
+**Como** cliente, **quero** sacar dinheiro no caixa eletrônico,
+**para** ter dinheiro em espécie.
+
+**Regras de negócio:**
+- **H06-R1:** O valor do saque deve ser maior que zero.
+- **H06-R2:** O valor do saque deve ser múltiplo de R$ 10,00, pois o
+  caixa possui apenas cédulas de R$ 10, R$ 20, R$ 50 e R$ 100.
+- **H06-R3:** O valor do saque não pode ser maior que o saldo.
+- **H06-R4:** O cliente pode fazer no máximo 3 saques por dia.
+- **H06-R5:** O total sacado no dia não pode passar de R$ 5.000,00.
+- **H06-R6:** Os limites diários reiniciam à meia-noite.
+- **H06-R7:** O caixa eletrônico funciona das 6h às 22h.
+- **H06-R8:** O caixa entrega a menor quantidade possível de cédulas,
+  começando pela de maior valor.
+- **H06-R9:** Se o caixa não tiver cédulas suficientes para montar o
+  valor, o saque é recusado e o saldo não é alterado.
+- **H06-R10:** Todo saque gera um lançamento no extrato.
+
+---
+
+## H07: Transferir entre contas do Banco Confiança
+**Como** cliente, **quero** transferir dinheiro para outra conta do
+Banco Confiança, **para** enviar dinheiro a outra pessoa.
+
+**Regras de negócio:**
+- **H07-R1:** O valor deve ser maior que zero e pode ter centavos.
+- **H07-R2:** O valor não pode ser maior que o saldo.
+- **H07-R3:** A conta de destino deve existir.
+- **H07-R4:** A conta de destino não pode ser a mesma conta de origem.
+- **H07-R5:** Antes de confirmar, o sistema exibe o nome e o CPF
+  mascarado do destinatário.
+- **H07-R6:** O limite por transferência é de R$ 5.000,00 das 6h às
+  20h e de R$ 1.000,00 das 20h às 6h.
+- **H07-R7:** A transferência acontece por completo ou não acontece:
+  o débito na origem e o crédito no destino ocorrem juntos.
+- **H07-R8:** A transferência gera um lançamento no extrato das duas
+  contas.
+
+---
+
+## H08: Ver extrato
+**Como** cliente, **quero** ver o extrato da minha conta,
+**para** acompanhar minhas movimentações.
+
+**Regras de negócio:**
+- **H08-R1:** O cliente só pode ver o extrato da própria conta.
+- **H08-R2:** Por padrão, o extrato mostra os últimos 30 dias.
+- **H08-R3:** O cliente pode filtrar por período (data inicial e final).
+- **H08-R4:** Os lançamentos aparecem do mais recente para o mais
+  antigo.
+- **H08-R5:** Cada lançamento mostra: data e hora, tipo (depósito,
+  saque, transferência enviada ou recebida), valor e saldo após a
+  operação.
+- **H08-R6:** Lançamentos nunca são editados nem apagados. Uma
+  correção é feita com um novo lançamento de estorno.
+
+---
+
+## H09: Sair do aplicativo (logout)
+**Como** cliente, **quero** sair do aplicativo,
+**para** que ninguém acesse minha conta pelo meu celular.
+
+**Regras de negócio:**
+- **H09-R1:** Ao sair, a sessão é encerrada e o acesso anterior deixa
+  de funcionar.
+- **H09-R2:** Para entrar de novo, o cliente deve fazer login novamente.
+
+---
+
+## Regras gerais
+- **GER-1:** Valores monetários são sempre tratados com 2 casas
+  decimais, sem erros de arredondamento.
+- **GER-2:** Todas as datas e horas seguem o horário de Brasília.
